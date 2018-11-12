@@ -6,7 +6,7 @@
 #' @export
 #'
 bbox_to_multipoly <- function(a_bbox){
-  if (!inherits(bbox, "bbox")) stop("bbox must be of class bbox see sf::st_bbox")
+  if (!inherits(a_bbox, "bbox")) stop("bbox must be of class bbox see sf::st_bbox")
 
   points_mat <- rbind(
       c(a_bbox$xmin, a_bbox$ymin),

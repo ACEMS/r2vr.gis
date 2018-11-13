@@ -15,6 +15,7 @@
 ##'   colour of a vertex.
 ##' @param faces a three column matrix of faces described by vertex indicies.
 ##' @return a matrix with one row per mesh triangle, each column representing a vertex, containing a colour index.
+##' @export
 vertex_to_face_colours <- function(vertex_colours, faces){
   matrix(vertex_colours[faces], ncol = 3, byrow = FALSE)
 }

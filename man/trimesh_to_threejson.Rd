@@ -34,6 +34,3 @@ Generate threejs model JSON from a triangular mesh.
 The format of threejs model JSON is described here: https://github.com/mrdoob/three.js/wiki/JSON-Model-format-3
 In this format each face is described by lists of indicies into lists of vertices, colours and normals. Colours, normals and vertices can be re-used or shared among faces so there are no length requirements on `vertices`, `colours`, or `normals`. All the `face_` arguments must have the same length or be not supplied.
 }
-\author{
-Miles McBain
-}

@@ -16,12 +16,12 @@ bbox_to_multipoly <- function(a_bbox){
       c(a_bbox$xmin, a_bbox$ymin))
   colnames(points_mat) <- NULL
 
-  mpoly <- st_sfc(st_multipolygon(
+  mpoly <- sf::st_sfc(sf::st_multipolygon(
   list(list(
       points_mat
     ))
   ))
-  st_crs(mpoly) <- st_crs(bbox)
+  sf::st_crs(mpoly) <- sf::st_crs(bbox)
   names(mpoly) <- NULL
   mpoly
 }

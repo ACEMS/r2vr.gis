@@ -12,7 +12,7 @@
 contour_2_raster <- function(contour_sf, raster_attribute, n_samples = 10000, nrow, ncol){
 
   x <- contour_sf
-  obj_crs <- st_crs(contour_sf)
+  obj_crs <- sf::st_crs(contour_sf)
   ## L1, L2 are the holes, and islands respectively
   coords <-
     sf::st_coordinates(x) %>%
@@ -22,7 +22,7 @@ contour_2_raster <- function(contour_sf, raster_attribute, n_samples = 10000, nr
   xy <-
     coords %>%
     dplyr::rename(x = X, y = Y) %>%
-    select(x,y) %>%
+    dplyr::select(x,y) %>%
     as.matrix()
 
   value <- x[[raster_attribute]][dplyr::pull(coords, L2)]

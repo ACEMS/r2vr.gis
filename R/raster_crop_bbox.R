@@ -17,7 +17,7 @@ raster_crop_bbox <- function(a_raster, sf_bbox){
   raster_crs <- raster::crs(a_raster)@projargs
 
   bbox_raster_crs <-
-    sf::st_transform(st_as_sfc(sf_bbox), raster_crs) %>%
+    sf::st_transform(sf::st_as_sfc(sf_bbox), raster_crs) %>%
     sf::st_bbox()
 
   extent_raster_crs <- bbox_to_extent(bbox_raster_crs)

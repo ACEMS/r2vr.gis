@@ -62,11 +62,17 @@ trimesh_to_threejson <- function(vertices, face_vertices,
   if (!is.matrix(vertices) || (ncol(vertices) != 3)){
     stop("vertices is not a 3 column matrix")
   }
+  if (anyNA(vertices)){
+    stop("vertices cannot contain NAs")
+  }
 
   ## face - vertex mapping
   ## check supplied pieces conform to expectations
   if (!is.matrix(face_vertices) || (ncol(face_vertices) != 3) ){
     stop("face_vertices is not a 3 column matrix")
+  }
+  if (anyNA(vertices)){
+    stop("face_vertices cannot contain NAs") 
   }
 
   ## threejs/VR specific transformations
@@ -109,7 +115,9 @@ trimesh_to_threejson <- function(vertices, face_vertices,
     if (!is.matrix(normals) || ncol(normals) != 3) {
       stop("normals is not a 3 column matrix")
     }
-
+    if (anyNA(normals)) {
+      stop("normals cannot contain NAs")
+    }
     ## format normals
     normals <-
       paste0(
@@ -128,28 +136,36 @@ trimesh_to_threejson <- function(vertices, face_vertices,
          (ncol(vertex_uvs) != 2) || missing(texture_file))
         ){
       stop("vertex_uvs is needs to be a 2 column matrix of the same length as vertices supplied with an image in texture_file")
-    } else {
-      ## looking good, set up the uvs.
-      uv_vector <- paste0("[",
-                          paste0(vertex_uvs[,1], ",", vertex_uvs[,2], collapse = ", "),
-                          "]")
     }
-    threejs_json_data$uvs <- uv_vector
+    if(anyNA(vertex_uvs)) {
+      stop("vertex uvs cannot contain NAs") 
+    }
+    ## looking good, set up the uvs.
+    threejs_json_data$uvs <-
+      paste0("[",
+             paste0(vertex_uvs[,1], ",", vertex_uvs[,2], collapse = ", "),
+             "]")
 
     ## from https://stackoverflow.com/questions/14872502/jsonloader-with-texture
     threejs_json_data$texture_map <- paste0("\"mapDiffuse\": \"", texture_file, "\",")
   }
 
-  if (!missing(face_vertex_colours) &&
-      (!is.matrix(face_vertex_colours) || (nrow(face_vertex_colours) != nrow(face_vertices)))
-      ){
-    stop("face_vertex_colours is not a 3 column matrix of same length as face_vertices.")
+  if (!missing(face_vertex_colours)) {
+    if (!is.matrix(face_vertex_colours) || (nrow(face_vertex_colours) != nrow(face_vertices))){
+      stop("face_vertex_colours is not a 3 column matrix of same length as face_vertices.")
+    }
+    if (anyNA(face_vertex_colours)){
+      stop("face_vertex_colours cannot contain NAs")
+    }
   }
 
-  if (!missing(face_vertex_normals) &&
-      (!is.matrix(face_vertex_normals) || (nrow(face_vertex_normals) != nrow(face_vertices)))
-      ){
-    stop("face_vertex_normals is not a 3 column matrix of same length as face_vertices.")
+  if (!missing(face_vertex_normals)){
+    if (!is.matrix(face_vertex_normals) || (nrow(face_vertex_normals) != nrow(face_vertices))){
+      stop("face_vertex_normals is not a 3 column matrix of same length as face_vertices.")
+    }
+    if (anyNA(face_vertex_normals)){
+      stop("face_vertex_normals cannont contain NAs")
+    }
   }
 
   ## faces

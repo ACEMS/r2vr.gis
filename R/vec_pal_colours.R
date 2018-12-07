@@ -10,6 +10,7 @@
 ##' @param n_cols the number of colours to generate using the `palette_fn`.
 ##' @param zero_index should the colour indexes begin at 0, for use with 0 indexed languages like Javascript?
 ##' @return A list contain two named vectors: 'colours' and 'indexes'.
+##' @export
 vec_pal_colours <- function(vec, palette_fn, n_cols, zero_index = FALSE){
   palette <- palette_fn(n_cols) %>%
     gsub(pattern = "#", replacement = "0x", x = .) %>%

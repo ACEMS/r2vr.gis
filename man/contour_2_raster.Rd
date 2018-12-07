@@ -4,7 +4,8 @@
 \alias{contour_2_raster}
 \title{Convert a shapefile with contours to a raster}
 \usage{
-contour_2_raster(contour_sf, raster_attribute, n_samples = 10000, nrow, ncol)
+contour_2_raster(contour_sf, raster_attribute, n_samples = 10000, nrow,
+  ncol)
 }
 \arguments{
 \item{contour_sf}{an sf object read from a shapefile with contours, eg elevation.}

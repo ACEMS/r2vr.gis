@@ -12,7 +12,7 @@
 ##' @param vertex_uvs A 2 column matrix of texture coordinates, the same length as `vertices`.
 ##' @param texture_file An path to an image file.
 ##' @return JSON describing the mesh.
-##' @author Miles McBain
+##' @export
 trimesh_to_threejson <- function(vertices, face_vertices,
                                  colours, face_vertex_colours,
                                  normals, face_vertex_normals,
@@ -94,9 +94,9 @@ trimesh_to_threejson <- function(vertices, face_vertices,
   ## create vertex list
   threejs_json_data$vertices <-
     vertices %>%
-    as_data_frame() %>%
-    transpose() %>%
-    map( ~paste0(., collapse = ',')) %>%
+    tibble::as_data_frame() %>%
+    purrr::transpose() %>%
+    purrr::map( ~paste0(., collapse = ',')) %>%
     paste0( ., collapse = ', ')
 
   ## colours

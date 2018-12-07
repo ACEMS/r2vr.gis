@@ -2,18 +2,16 @@
 % Please edit documentation in R/bbox_to_multipoly.R
 \name{bbox_to_multipoly}
 \alias{bbox_to_multipoly}
-\title{Convert a bounding box, defined by min and max latitude and longitude, to an `sf` MULTIPOLYGON}
+\title{Convert a bounding box, defined by min and max x and y, to an `sf` MULTIPOLYGON}
 \usage{
-bbox_to_multipoly(a_bbox, crs)
+bbox_to_multipoly(a_bbox)
 }
 \arguments{
-\item{a_bbox}{a four number named vector with `xmin`, `xmax`, `ymin`, `ymax`}
-
-\item{crs}{string to set for the returned multipolygon geometry.}
+\item{a_bbox}{an sf bbox object with with `xmin`, `xmax`, `ymin`, `ymax`.}
 }
 \value{
 a MULTIPOLYGON sf geometry.
 }
 \description{
-Convert a bounding box, defined by min and max latitude and longitude, to an `sf` MULTIPOLYGON
+Convert a bounding box, defined by min and max x and y, to an `sf` MULTIPOLYGON
 }

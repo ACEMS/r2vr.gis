@@ -5,7 +5,8 @@
 \title{trimesh_to_threejson}
 \usage{
 trimesh_to_threejson(vertices, face_vertices, colours, face_vertex_colours,
-  normals, face_vertex_normals, vertex_uvs, texture_file)
+  normals, face_vertex_normals, vertex_uvs, texture_file,
+  transparency = 1)
 }
 \arguments{
 \item{vertices}{a matrix of vertices with 3 columns corresponding to: x, y, z.}
@@ -23,6 +24,10 @@ trimesh_to_threejson(vertices, face_vertices, colours, face_vertex_colours,
 \item{vertex_uvs}{A 2 column matrix of texture coordinates, the same length as `vertices`.}
 
 \item{texture_file}{An path to an image file.}
+
+\item{transparency}{A numeric value between 0 and 1 indicating to what
+degree the model should be transparent. 1.0 is fully opaque, 0 is fully
+transparent.}
 }
 \value{
 JSON describing the mesh.

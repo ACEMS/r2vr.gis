@@ -11,12 +11,16 @@
 ##' @param face_vertex_normals a matrix with 3 columns of face vertex normal indicies in `normals`, each row corresponds to a face in `face_vertices`. Row 1, column 1 is the normal index of vertex 1 in face 1.
 ##' @param vertex_uvs A 2 column matrix of texture coordinates, the same length as `vertices`.
 ##' @param texture_file An path to an image file.
+##' @param transparency A numeric value between 0 and 1 indicating to what
+##'   degree the model should be transparent. 1.0 is fully opaque, 0 is fully
+##'   transparent.
 ##' @return JSON describing the mesh.
 ##' @export
 trimesh_to_threejson <- function(vertices, face_vertices,
                                  colours, face_vertex_colours,
                                  normals, face_vertex_normals,
-                                 vertex_uvs, texture_file) {
+                                 vertex_uvs, texture_file,
+                                 transparency = 1.0) {
 
  ## format from: https://github.com/mrdoob/three.js/wiki/JSON-Model-format-3
  json_template <- '{
@@ -33,7 +37,7 @@ trimesh_to_threejson <- function(vertices, face_vertices,
       "depthWrite": true,
       "shading": "Phong",
       "specularCoef": 0.0,
-      "transparency": 1.0,
+      "transparency": ${transparency},
       "transparent": false,
       "vertexColors": 2}],
     "vertices": [ ${vertices} ],
@@ -57,6 +61,9 @@ trimesh_to_threejson <- function(vertices, face_vertices,
 
   threejs_json_data <-
     new.env()
+
+  ## transparency
+  three_json_data$transparency <- transparency
 
   ## vertices
   if (!is.matrix(vertices) || (ncol(vertices) != 3)){

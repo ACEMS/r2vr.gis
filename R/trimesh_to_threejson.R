@@ -63,7 +63,7 @@ trimesh_to_threejson <- function(vertices, face_vertices,
     new.env()
 
   ## transparency
-  three_json_data$transparency <- transparency
+  threejs_json_data$transparency <- transparency
 
   ## vertices
   if (!is.matrix(vertices) || (ncol(vertices) != 3)){
